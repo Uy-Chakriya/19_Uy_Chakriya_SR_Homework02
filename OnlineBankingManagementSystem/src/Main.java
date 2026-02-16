@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.Random;
 public class Main {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_YELLOW = "\u001B[33m";
@@ -43,40 +42,38 @@ public class Main {
     }
 
     private static void createAccount() {
-
-        System.out.println(ANSI_BLUE+ "\n>>>>>>>>>>>>>>>>>>>>   Creating Account   <<<<<<<<<<<<<<<<<<<<" + ANSI_RESET);
-        System.out.println(ANSI_GREEN+ "1. Checking Account\n2. Saving Account\n3. Back" + ANSI_RESET);
-        System.out.println("==============================================================");
-        System.out.print("What type of account do you want to create? ");
+        System.out.println("\n>>>>>>>>>>>>>>>>>>>>   Creating Account   <<<<<<<<<<<<<<<<<<<<");
+        System.out.println("1. Checking Account\n2. Saving Account\n3. Back");
         int type = Validation.validateIntInput(1, 3);
         if (type == 3) return;
 
         System.out.println("\n>>>>>>>>>>>>>>>>>>>>   Account Information   <<<<<<<<<<<<<<<<<<<<");
-        sc.nextLine();
 
-        System.out.print("Enter username: ");
-        String name = sc.nextLine();
+        // Validate Name: Only letters and spaces
+        String name = Validation.validateStringPattern("^[a-zA-Z\\s]+$",
+                "Enter username: ", "Name can only contain letters and spaces.");
 
-        System.out.print("Enter date of birth (dd-mm-yyyy): ");
-        String dob = Validation.validateStringPattern("\\d{2}-\\d{2}-\\d{4}", "Format: dd-mm-yyyy (e.g., 27-03-2000)");
+        // Validate DOB: dd-mm-yyyy format
+        String dob = Validation.validateStringPattern("\\d{2}-\\d{2}-\\d{4}",
+                "Enter date of birth (dd-mm-yyyy): ", "Format must be dd-mm-yyyy.");
 
+        // Validate Gender
         System.out.print("Enter gender: ");
         String gender = sc.nextLine();
-        System.out.print("Enter phone number: ");
-        String phone = Validation.validateStringPattern("\\d{8,10}", "Format: 8 -> 10 digits only");
 
-        System.out.println("=================================================================");
-        String id = String.valueOf(new Random().nextInt(900000000) + 100000000);
+        // Validate Phone Number: 8 to 10 digits
+        String phone = Validation.validateStringPattern("\\d{8,10}",
+                "Enter phone number: ", "Phone must be 8 to 10 digits.");
 
-        if (type == 1)
-        {
+        // Generate random 9-digit account number
+        String id = String.valueOf(new java.util.Random().nextInt(900000000) + 100000000);
+
+        if (type == 1) {
             checking = new CheckingAccount(id, name, dob, gender, phone);
-            System.out.println(ANSI_GREEN+"Your checking account has been created successfully!"+ ANSI_RESET);
-        }
-        else
-        {
+            System.out.println("Checking account created successfully!");
+        } else {
             saving = new SavingAccount(id, name, dob, gender, phone);
-            System.out.println(ANSI_GREEN+"Your saving account has been created successfully!" + ANSI_RESET);
+            System.out.println("Saving account created successfully!");
         }
     }
 
@@ -204,6 +201,7 @@ public class Main {
         System.out.println("Total balance:            $ " + bal);
         System.out.println(ANSI_RED+ "\nWithdrew successfully!" + ANSI_RESET);
     }
+
     private static void displayInfo() {
         if(checking != null) checking.displayAccountInfo();
         if(saving != null) saving.displayAccountInfo();
