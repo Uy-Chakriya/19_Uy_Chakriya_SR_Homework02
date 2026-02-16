@@ -1,4 +1,3 @@
-//i use interface to do it
 public class CheckingAccount implements Account {
     private String accountNumber;
     private String userName;
@@ -6,6 +5,7 @@ public class CheckingAccount implements Account {
     private String gender;
     private String phoneNumber;
     private double balance;
+
     public CheckingAccount(String accountNumber,
                            String userName,
                            String dateOfBirth,

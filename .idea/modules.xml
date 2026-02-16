@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/19_Uy_Chakriya_SR_Homework02.iml" filepath="$PROJECT_DIR$/.idea/19_Uy_Chakriya_SR_Homework02.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Test/Enum/Enum.iml" filepath="$PROJECT_DIR$/Test/Enum/Enum.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Test/Test.iml" filepath="$PROJECT_DIR$/Test/Test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Test/Validation/Validation.iml" filepath="$PROJECT_DIR$/Test/Validation/Validation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OnlineBankingManagementSystem/OnlineBankingManagementSystem.iml" filepath="$PROJECT_DIR$/OnlineBankingManagementSystem/OnlineBankingManagementSystem.iml" />
     </modules>
   </component>
 </project>

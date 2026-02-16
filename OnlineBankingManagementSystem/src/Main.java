@@ -30,7 +30,7 @@ public class Main {
     }
 
     private static void displayMainMenu() {
-        System.out.println("\n================== Online Banking System ==================");
+        System.out.println(ANSI_BLUE+"\n================== Online Banking System ==================" + ANSI_RESET);
         System.out.println("1. Create Account");
         System.out.println("2. Deposit Money");
         System.out.println("3. Withdraw Money");
@@ -38,7 +38,7 @@ public class Main {
         System.out.println("5. Display Account Information");
         System.out.println("6. Delete Account");
         System.out.println("7. Exit");
-        System.out.println("-----------------------------------------");
+        System.out.println("---------------------------------------------------------------------");
         System.out.print("=> Choose option(1-7) : ");
     }
 
@@ -58,14 +58,12 @@ public class Main {
         String name = sc.nextLine();
 
         System.out.print("Enter date of birth (dd-mm-yyyy): ");
-        String dob = Validation.validateStringPattern("\\d{2}-\\d{2}-\\d{4}",
-                "Format: dd-mm-yyyy (e.g., 27-03-2000)");
+        String dob = Validation.validateStringPattern("\\d{2}-\\d{2}-\\d{4}", "Format: dd-mm-yyyy (e.g., 27-03-2000)");
 
         System.out.print("Enter gender: ");
         String gender = sc.nextLine();
-
         System.out.print("Enter phone number: ");
-        String phone = Validation.validateStringPattern("\\d{8,15}", "Format: 8 to 15 digits");
+        String phone = Validation.validateStringPattern("\\d{8,10}", "Format: 8 -> 10 digits only");
 
         System.out.println("=================================================================");
         String id = String.valueOf(new Random().nextInt(900000000) + 100000000);
@@ -166,12 +164,16 @@ public class Main {
             if (checking.getBalance() >= amount) {
                 checking.transfer(amount, saving);
                 System.out.println("Transfer successfully!");
-            } else System.out.println("==>> Error: Insufficient balance.");
-        } else {
+            }
+            else System.out.println("==>> Error: Insufficient balance.");
+        }
+        else
+        {
             if (saving.getBalance() >= amount) {
                 saving.transfer(amount, checking);
                 System.out.println("Transfer successfully!");
-            } else System.out.println("==>> Error: Insufficient balance.");
+            }
+            else System.out.println("==>> Error: Insufficient balance.");
         }
     }
 
@@ -202,7 +204,6 @@ public class Main {
         System.out.println("Total balance:            $ " + bal);
         System.out.println(ANSI_RED+ "\nWithdrew successfully!" + ANSI_RESET);
     }
-
     private static void displayInfo() {
         if(checking != null) checking.displayAccountInfo();
         if(saving != null) saving.displayAccountInfo();
@@ -210,9 +211,9 @@ public class Main {
             System.out.println("No accounts found.");
     }
 
-    private static void displayHeader(String type, double rec, double total) {
+    private static void displayHeader(String type, double recieved, double total) {
         System.out.println("\n                " + type + "                ");
-        System.out.println("Received    :                $ " + rec);
+        System.out.println("Received    :              $ " +  recieved);
         System.out.println("Total Amount:                $ " + total);
         System.out.println("==============================================================");
     }
